@@ -6,10 +6,19 @@ import { truncate } from '@utils/truncate';
 import { fetch } from '@tauri-apps/api/http';
 import Avatar from 'boring-avatars';
 import destr from 'destr';
+import { useRouter } from 'next/router';
 import { memo, useCallback, useEffect, useState } from 'react';
 
 export const UserMini = memo(function UserMini({ pubkey }: { pubkey: string }) {
+  const router = useRouter();
   const [profile, setProfile] = useState(null);
+
+  const openChat = () => {
+    router.push({
+      pathname: '/chats/[id]',
+      query: { id: pubkey },
+    });
+  };
 
   const fetchProfile = useCallback(async (id: string) => {
     const res = await fetch(`https://rbr.bio/${id}/metadata.json`, {
@@ -35,7 +44,10 @@ export const UserMini = memo(function UserMini({ pubkey }: { pubkey: string }) {
   }, [fetchProfile, pubkey]);
 
   return (
-    <div className="flex cursor-pointer items-center gap-2.5 rounded-md px-2.5 py-1.5 text-sm font-medium hover:bg-zinc-900">
+    <div
+      onClick={() => openChat()}
+      className="flex cursor-pointer items-center gap-2.5 rounded-md px-2.5 py-1.5 text-sm font-medium hover:bg-zinc-900"
+    >
       <div className="relative h-5 w-5 shrink-0 overflow-hidden rounded">
         {profile?.picture ? (
           <ImageWithFallback src={profile.picture} alt={pubkey} fill={true} className="rounded object-cover" />

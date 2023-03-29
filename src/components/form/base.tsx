@@ -8,7 +8,6 @@ import { relaysAtom } from '@stores/relays';
 
 import { dateToUnix } from '@utils/getDate';
 
-import { PersonIcon } from '@radix-ui/react-icons';
 import { useAtom, useAtomValue } from 'jotai';
 import { useResetAtom } from 'jotai/utils';
 import { getEventHash, signEvent } from 'nostr-tools';
