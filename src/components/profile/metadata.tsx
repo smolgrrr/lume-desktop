@@ -10,7 +10,7 @@ import destr from 'destr';
 import { useAtomValue } from 'jotai';
 import Image from 'next/image';
 import { Author } from 'nostr-relaypool';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 
 const DEFAULT_BANNER = 'https://bafybeiacwit7hjmdefqggxqtgh6ht5dhth7ndptwn2msl5kpkodudsr7py.ipfs.w3s.link/banner-1.jpg';
 
@@ -19,11 +19,11 @@ export default function ProfileMetadata({ id }: { id: string }) {
   const relays: any = useAtomValue(relaysAtom);
 
   const [profile, setProfile] = useState(null);
+  const user = useMemo(() => new Author(pool, relays, id), [id, pool, relays]);
 
   useEffect(() => {
-    const user = new Author(pool, relays, id);
     user.metaData((res) => setProfile(destr(res.content)), 0);
-  }, [id, pool, relays]);
+  }, [user]);
 
   return (
     <>
