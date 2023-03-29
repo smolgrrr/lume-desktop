@@ -89,7 +89,7 @@ export default function Page() {
                 <div className="w-full border-t border-zinc-800"></div>
               </div>
               <div className="relative flex justify-center">
-                <span className="bg-black px-2 text-sm text-zinc-500">or</span>
+                <span className="bg-zinc-950 px-2 text-sm text-zinc-500">or</span>
               </div>
             </div>
             <div className="flex flex-col gap-2">

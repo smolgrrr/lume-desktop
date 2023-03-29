@@ -7,13 +7,13 @@ export default function WithSidebarLayout({ children }: { children: React.ReactN
     <div className="flex h-screen w-full flex-col">
       <div
         data-tauri-drag-region
-        className="relative h-11 shrink-0 border-b border-zinc-100 bg-white dark:border-zinc-900 dark:bg-black"
+        className="relative h-11 shrink-0 border-b border-zinc-100 bg-white dark:border-zinc-900 dark:bg-zinc-950"
       >
         <AppHeader />
       </div>
       <div className="relative flex min-h-0 w-full flex-1">
         <div className="relative w-[68px] shrink-0 border-r border-zinc-900">
-          <div className="absolute top-0 left-0 h-12 w-full" />
+          <div className="absolute left-0 top-0 h-12 w-full" />
           <AccountColumn />
         </div>
         <div className="grid w-full grid-cols-4 xl:grid-cols-5">
