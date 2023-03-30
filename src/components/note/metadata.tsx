@@ -1,5 +1,6 @@
 import { NoteComment } from '@components/note/meta/comment';
 import { NoteReaction } from '@components/note/meta/reaction';
+import { NoteRepost } from '@components/note/meta/repost';
 import { RelayContext } from '@components/relaysProvider';
 
 import { relaysAtom } from '@stores/relays';
@@ -14,9 +15,11 @@ export default function NoteMetadata({
   eventPubkey,
   eventContent,
   eventTime,
+  event,
 }: {
   eventID: string;
   eventPubkey: string;
+  event: string;
   eventTime: any;
   eventContent: any;
 }) {
@@ -24,6 +27,7 @@ export default function NoteMetadata({
   const relays = useAtomValue(relaysAtom);
 
   const [likes, setLikes] = useState(0);
+  const [reposts, setReposts] = useState(0);
   const [comments, setComments] = useState(0);
 
   useEffect(() => {
@@ -32,7 +36,7 @@ export default function NoteMetadata({
         {
           '#e': [eventID],
           since: parseInt(eventTime),
-          kinds: [1, 7],
+          kinds: [1, 6, 7],
           limit: 50,
         },
       ],
@@ -44,6 +48,10 @@ export default function NoteMetadata({
             setComments((comments) => (comments += 1));
             // save comment to database
             createCacheCommentNote(event, eventID);
+            break;
+          case 6:
+            // update state
+            setReposts((reposts) => (reposts += 1));
             break;
           case 7:
             if (event.content === '🤙' || event.content === '+') {
@@ -75,6 +83,7 @@ export default function NoteMetadata({
         eventContent={eventContent}
         eventTime={eventTime}
       />
+      <NoteRepost count={reposts} repostEvent={event} eventID={eventID} eventPubkey={eventPubkey} />
       <NoteReaction count={likes} eventID={eventID} eventPubkey={eventPubkey} />
     </div>
   );

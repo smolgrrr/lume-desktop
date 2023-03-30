@@ -2,7 +2,7 @@ import NoteMetadata from '@components/note/metadata';
 import { NoteParent } from '@components/note/parent';
 import { ImagePreview } from '@components/note/preview/image';
 import { VideoPreview } from '@components/note/preview/video';
-import { NoteRepost } from '@components/note/repost';
+import { NoteQuoteRepost } from '@components/note/quoterepost';
 import { UserExtend } from '@components/user/extend';
 import { UserMention } from '@components/user/mention';
 
@@ -48,7 +48,7 @@ export const NoteBase = memo(function NoteBase({ event }: { event: any }) {
           return <UserMention key={match + i} pubkey={tags[match][1]} />;
         } else if (tags[match][0] === 'e') {
           // note-mentions
-          return <NoteRepost key={match + i} id={tags[match][1]} />;
+          return <NoteQuoteRepost key={match + i} id={tags[match][1]} />;
         } else {
           return;
         }
@@ -94,6 +94,7 @@ export const NoteBase = memo(function NoteBase({ event }: { event: any }) {
         </div>
         <div onClick={(e) => e.stopPropagation()} className="mt-5 pl-[52px]">
           <NoteMetadata
+            event={event}
             eventID={event.id}
             eventPubkey={event.pubkey}
             eventContent={event.content}

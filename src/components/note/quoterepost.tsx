@@ -11,7 +11,7 @@ import { useAtomValue } from 'jotai';
 import { memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import reactStringReplace from 'react-string-replace';
 
-export const NoteRepost = memo(function NoteRepost({ id }: { id: string }) {
+export const NoteQuoteRepost = memo(function NoteQuoteRepost({ id }: { id: string }) {
   const pool: any = useContext(RelayContext);
 
   const relays = useAtomValue(relaysAtom);

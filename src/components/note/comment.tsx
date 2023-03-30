@@ -1,7 +1,7 @@
 import NoteMetadata from '@components/note/metadata';
 import { ImagePreview } from '@components/note/preview/image';
 import { VideoPreview } from '@components/note/preview/video';
-import { NoteRepost } from '@components/note/repost';
+import { NoteQuoteRepost } from '@components/note/quoterepost';
 import { UserExtend } from '@components/user/extend';
 import { UserMention } from '@components/user/mention';
 
